@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="PiNova System Studio — a modern, cross-platform desktop system monitor for Raspberry Pi, Linux, Windows and macOS.">
+  <title>PiNova System Studio — See your system clearly</title>
+  <link rel="icon" href="assets/pinova.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="site-config.js"></script>
+  <script defer src="site.js"></script>
+</head>
+<body>
+  <div class="orb orb-a"></div><div class="orb orb-b"></div>
+  <header class="nav wrap">
+    <a class="brand" href="#home" aria-label="PiNova home">
+      <img src="assets/pinova.svg" alt="" width="42" height="42">
+      <span>PiNova <small>SYSTEM STUDIO</small></span>
+    </a>
+    <nav><a href="#features">Features</a><a href="#platforms">Platforms</a><a href="#download">Download</a></nav>
+    <a class="nav-cta" href="#download">Get PiNova <span>↗</span></a>
+  </header>
+
+  <main id="home">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="pulse"></span> VERSION <span data-version>v5.1.0</span> · DESKTOP SYSTEM MONITOR</p>
+        <h1>Your system.<br><span>Clearly in view.</span></h1>
+        <p class="lede">A beautiful control room for your machine. Track CPU, memory, disk, network activity, processes and history from one calm, focused dashboard.</p>
+        <div class="hero-actions"><a class="button primary" href="#download">Download PiNova <span>↓</span></a><a class="button ghost" href="#features">Explore features <span>→</span></a></div>
+        <div class="trust-line"><span>●</span> Local-first · No account required · Your data stays on your device</div>
+      </div>
+      <div class="dashboard-preview" aria-label="Illustrative preview of the PiNova dashboard">
+        <div class="mock-window">
+          <div class="window-bar"><div class="dots"><i></i><i></i><i></i></div><span>PiNova / Overview</span><span class="live"><b></b> LIVE</span></div>
+          <div class="mock-body">
+            <aside class="mock-side"><div class="mock-logo">P</div><div class="side-line active"></div><div class="side-line"></div><div class="side-line"></div><div class="side-line short"></div><div class="side-line"></div></aside>
+            <div class="mock-content"><div class="mock-title"><div><small>SYSTEM OVERVIEW</small><h3>Good evening.</h3></div><span class="chip">● All systems nominal</span></div>
+              <div class="metric-grid"><div class="metric"><small>PROCESSOR</small><strong>24<span>%</span></strong><div class="meter blue"><i style="width:24%"></i></div><em>CPU utilization</em></div><div class="metric"><small>MEMORY</small><strong>63<span>%</span></strong><div class="meter purple"><i style="width:63%"></i></div><em>In use</em></div><div class="metric"><small>STORAGE</small><strong>41<span>%</span></strong><div class="meter mint"><i style="width:41%"></i></div><em>Home disk</em></div></div>
+              <div class="chart-card"><div class="chart-heading"><span>Performance timeline</span><small>LAST SAMPLES</small></div><svg viewBox="0 0 500 140" role="img" aria-label="Decorative performance graph"><defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#57f2c2" stop-opacity=".25"/><stop offset="1" stop-color="#57f2c2" stop-opacity="0"/></linearGradient></defs><path d="M0 104 C30 97 36 65 65 79 S110 112 140 73 S178 82 205 50 S251 77 280 62 S323 85 350 45 S388 66 415 31 S465 54 500 20 L500 140 L0 140 Z" fill="url(#fill)"/><path d="M0 104 C30 97 36 65 65 79 S110 112 140 73 S178 82 205 50 S251 77 280 62 S323 85 350 45 S388 66 415 31 S465 54 500 20" fill="none" stroke="#57f2c2" stroke-width="3" stroke-linecap="round"/></svg><div class="chart-foot"><span>10:42:08</span><span>10:44:52</span></div></div>
+            </div>
+          </div>
+        </div><div class="float-tag tag-one"><span>↗</span> Live metrics</div><div class="float-tag tag-two"><span>◷</span> History saved locally</div>
+      </div>
+    </section>
+
+    <section class="platform-strip wrap" id="platforms"><p>ONE DASHBOARD. YOUR PLATFORM.</p><div class="platforms"><div><b>◉</b> Raspberry Pi</div><div><b>⌘</b> macOS</div><div><b>⊞</b> Windows</div><div><b>◈</b> Linux</div></div></section>
+
+    <section class="features section wrap" id="features">
+      <div class="section-head"><p class="eyebrow">BUILT FOR CLARITY</p><h2>Powerful insight, <span>without the clutter.</span></h2><p>All the essentials for understanding your machine, wrapped in a clean desktop experience.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card"><div class="feature-icon mint-icon">⌁</div><h3>Live performance</h3><p>Keep an eye on CPU load, memory use and storage with quick-glance metric cards and a rolling performance timeline.</p></article>
+        <article class="feature-card"><div class="feature-icon blue-icon">▤</div><h3>Process manager</h3><p>Search running processes and inspect CPU and memory use. Send a stop request when you know it is safe.</p></article>
+        <article class="feature-card"><div class="feature-icon purple-icon">◷</div><h3>History & reports</h3><p>Browse saved readings across time ranges, compare recorded values and export CSV or a system report.</p></article>
+        <article class="feature-card"><div class="feature-icon amber-icon">⌁</div><h3>Network activity</h3><p>Monitor interface counters and estimated receive/send rates with platform-aware system APIs.</p></article>
+        <article class="feature-card"><div class="feature-icon pink-icon">⚑</div><h3>Threshold alerts</h3><p>Configure CPU, memory, storage and temperature thresholds, then review warning and recovery events.</p></article>
+        <article class="feature-card"><div class="feature-icon mint-icon">⚙</div><h3>Your settings</h3><p>Choose a refresh interval, set warning levels and keep your preferences across launches.</p></article>
+      </div>
+      <p class="note">Temperature sensors depend on hardware and operating-system support. On systems that do not expose a sensor, PiNova displays N/A rather than a guessed reading.</p>
+    </section>
+
+    <section class="download-section" id="download"><div class="wrap download-wrap"><div class="section-head left"><p class="eyebrow">CHOOSE YOUR BUILD</p><h2>Ready when <span>you are.</span></h2><p>Download the package for your platform. Release files appear here after the project's GitHub Actions build succeeds.</p></div>
+      <div class="download-grid">
+        <article class="download-card featured"><div class="os-icon windows">⊞</div><div class="download-text"><h3>Windows</h3><p>Windows 10/11 · x64</p></div><a class="download-link" data-asset="PiNova-System-Studio-Windows-x64.zip" href="#download">Download <span>↓</span></a></article>
+        <article class="download-card"><div class="os-icon apple">⌘</div><div class="download-text"><h3>macOS · Apple Silicon</h3><p>Apple M-series · ARM64</p></div><a class="download-link" data-asset="PiNova-System-Studio-macOS-arm64.zip" href="#download">Download <span>↓</span></a></article>
+        <article class="download-card"><div class="os-icon apple">⌘</div><div class="download-text"><h3>macOS · Intel</h3><p>Intel-based Mac</p></div><a class="download-link" data-asset="PiNova-System-Studio-macOS-x64.zip" href="#download">Download <span>↓</span></a></article>
+        <article class="download-card"><div class="os-icon linux">◈</div><div class="download-text"><h3>Linux</h3><p>Linux desktop · x64</p></div><a class="download-link" data-asset="PiNova-System-Studio-Linux-x64.tar.gz" href="#download">Download <span>↓</span></a></article>
+        <article class="download-card"><div class="os-icon pi">π</div><div class="download-text"><h3>Raspberry Pi</h3><p>Raspberry Pi OS · ARM64</p></div><a class="download-link" data-asset="PiNova-System-Studio-Raspberry-Pi-arm64.tar.gz" href="#download">Download <span>↓</span></a></article>
+      </div><div class="release-note"><span>ⓘ</span><p>Build downloads are published from the project's GitHub Releases. Until you upload the project and create a version tag, these links will be placeholders.</p></div>
+    </div></section>
+
+    <section class="faq wrap"><div><p class="eyebrow">QUICK NOTES</p><h2>Good to know.</h2></div><div class="faq-list"><details><summary>Does PiNova upload my system data?</summary><p>No. The app stores history and settings locally on your computer. The website is a download page; it does not send your readings anywhere.</p></details><details><summary>Does temperature monitoring work everywhere?</summary><p>Not always. Raspberry Pi/Linux often expose a thermal reading. Many Windows PCs and Mac models do not provide a standard sensor interface, so the app may show N/A.</p></details><details><summary>Why are the download links not ready yet?</summary><p>The files must first be built on their target operating systems by GitHub Actions and published as a release. Follow the README included with the project.</p></details></div></section>
+  </main>
+  <footer class="footer"><div class="wrap footer-inner"><a class="brand" href="#home"><img src="assets/pinova.svg" alt="" width="34" height="34"><span>PiNova <small>SYSTEM STUDIO</small></span></a><span>Made for curious minds. © <span id="year"></span> PiNova System Studio.</span><a href="https://github.com/" data-repo-link>Source & releases ↗</a></div></footer>
+</body>
+</html>

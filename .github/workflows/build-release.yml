@@ -1,0 +1,121 @@
+name: Build PiNova releases
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -r requirements-build.txt
+      - name: Build Windows app
+        run: python -m PyInstaller --noconfirm --clean --windowed --name PiNovaSystemStudio app/pinova_system_studio.py
+      - name: Package Windows app
+        shell: pwsh
+        run: Compress-Archive -Path "dist/PiNovaSystemStudio" -DestinationPath "PiNova-System-Studio-Windows-x64.zip" -Force
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-release
+          path: PiNova-System-Studio-Windows-x64.zip
+          if-no-files-found: error
+
+  macos-arm64:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -r requirements-build.txt
+      - name: Verify Tkinter
+        run: python -c "import tkinter, psutil"
+      - name: Build macOS app
+        run: python -m PyInstaller --noconfirm --clean --windowed --name "PiNova System Studio" app/pinova_system_studio.py
+      - name: Package macOS app
+        run: ditto -c -k --sequesterRsrc --keepParent "dist/PiNova System Studio.app" "PiNova-System-Studio-macOS-arm64.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-arm64-release
+          path: PiNova-System-Studio-macOS-arm64.zip
+          if-no-files-found: error
+
+  macos-x64:
+    runs-on: macos-15-intel
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -r requirements-build.txt
+      - name: Build macOS Intel app
+        run: python -m PyInstaller --noconfirm --clean --windowed --name "PiNova System Studio" app/pinova_system_studio.py
+      - name: Package macOS app
+        run: ditto -c -k --sequesterRsrc --keepParent "dist/PiNova System Studio.app" "PiNova-System-Studio-macOS-x64.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-x64-release
+          path: PiNova-System-Studio-macOS-x64.zip
+          if-no-files-found: error
+
+  linux-x64:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Tkinter build support
+        run: sudo apt-get update && sudo apt-get install -y python3-tk python3-venv python3-dev build-essential
+      - name: Create build environment
+        run: python3 -m venv --system-site-packages .venv && .venv/bin/python -m pip install --upgrade pip && .venv/bin/python -m pip install -r requirements-build.txt
+      - name: Build Linux app
+        run: .venv/bin/python -m PyInstaller --noconfirm --clean --windowed --name PiNovaSystemStudio app/pinova_system_studio.py
+      - name: Package Linux app
+        run: tar -czf PiNova-System-Studio-Linux-x64.tar.gz -C dist PiNovaSystemStudio
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-x64-release
+          path: PiNova-System-Studio-Linux-x64.tar.gz
+          if-no-files-found: error
+
+  raspberry-pi-arm64:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Tkinter build support
+        run: sudo apt-get update && sudo apt-get install -y python3-tk python3-venv python3-dev build-essential
+      - name: Create build environment
+        run: python3 -m venv --system-site-packages .venv && .venv/bin/python -m pip install --upgrade pip && .venv/bin/python -m pip install -r requirements-build.txt
+      - name: Build ARM64 app
+        run: .venv/bin/python -m PyInstaller --noconfirm --clean --windowed --name PiNovaSystemStudio app/pinova_system_studio.py
+      - name: Package ARM64 app
+        run: tar -czf PiNova-System-Studio-Raspberry-Pi-arm64.tar.gz -C dist PiNovaSystemStudio
+      - uses: actions/upload-artifact@v4
+        with:
+          name: raspberry-pi-arm64-release
+          path: PiNova-System-Studio-Raspberry-Pi-arm64.tar.gz
+          if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [windows, macos-arm64, macos-x64, linux-x64, raspberry-pi-arm64]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+      - name: Publish release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: release-assets/**/*
